@@ -6,7 +6,7 @@ import TodoList from '../todo-list';
 import ItemStatusFilter from '../item-status-filter';
 
 import './app.css';
-
+  
 
 const App = () => {
 
@@ -24,7 +24,9 @@ const App = () => {
           <ItemStatusFilter />
         </div>
   
-        <TodoList todos={todoData} />
+        <TodoList 
+        todos={todoData}
+        onDeleted={ (id) => console.log("del", id)} />
       </div>
     );
 };
