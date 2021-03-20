@@ -4,11 +4,15 @@ import AppHeader from '../app-header';
 import SearhPanel from '../searh-panel';
 import TodoList from '../todo-list';
 import ItemStatusFilter from '../item-status-filter';
+import ItemAddForm from '../item-add-form';
+
 
 import './app.css';
   
 
 export default class App extends Component{
+
+    maxId = 100;
 
     state = {
       todoData: [
@@ -38,6 +42,26 @@ export default class App extends Component{
        };
      })
     };
+
+    addIteam = (text) => {
+      //generate id 
+     
+      const newItem = {
+        label: text,
+        important: false,
+        id: this.maxId++
+      };
+
+       // add element in array
+       this.setState(({ todoData}) => {
+         const newArr = [...todoData, newItem];
+
+         return {
+           todoData: newArr
+         } 
+       });
+      
+    }; 
     
     render() {
       return (
@@ -51,6 +75,8 @@ export default class App extends Component{
         <TodoList 
         todos={this.state.todoData}
         onDeleted={ this.deleteItem} />
+
+        <ItemAddForm onItemAdded={ this.addIteam}/>
       </div>
     );
   }
